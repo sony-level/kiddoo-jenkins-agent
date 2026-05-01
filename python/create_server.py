@@ -19,9 +19,9 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
-from aws import BASH_SCRIPT, run_bash
-from log import log, warn
-from notify import ERR, INFO, OK, notify
+from aws import BASH_SCRIPT, run_bash  # noqa: E402
+from log import log, warn  # noqa: E402
+from notify import ERR, INFO, OK, notify  # noqa: E402
 
 
 def parse_args():
