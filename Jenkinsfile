@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'amd64-Debian-12'
+        label '12'
     }
 
     options {
