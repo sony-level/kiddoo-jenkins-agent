@@ -4,7 +4,7 @@
 # Version : 1.1.0
 # Purpose : AWS compute operations -- AMI lookup, EC2 launch, EIP,
 #           instance health validation
-# Author  : level-sony
+# Author  : level sony
 # Requires: lib/utils.sh (log / ok / warn / die), lib/user_data.sh (build_user_data),
 #           AWS_REGION, SERVER_NAME, INSTANCE_TYPE, SSH_PORT,
 #           ROOT_VOLUME_GIB must be set

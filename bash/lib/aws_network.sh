@@ -3,7 +3,7 @@
 # File    : lib/aws_network.sh
 # Version : 1.0.0
 # Purpose : AWS network operations -- VPC, subnet, security group, SSH key pair
-# Author  : kiddoo-infra
+# Author  : Level sony
 # Requires: lib/utils.sh (log / ok / warn / die), AWS_REGION,
 #           SERVER_NAME, SSH_PORT must be set by the caller
 # -----------------------------------------------------------------------------

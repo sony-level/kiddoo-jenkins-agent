@@ -4,7 +4,7 @@
 # Version : 1.0.0
 # Purpose : Build and base64-encode the cloud-init user data script that
 #           configures the instance as a Jenkins agent.
-# Author  : kiddoo-infra
+# Author  : Level sony
 # Requires: lib/utils.sh (log), SSH_PORT and DISCORD_WEBHOOK_URL must be set
 # -----------------------------------------------------------------------------
 

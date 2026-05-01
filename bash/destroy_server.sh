@@ -4,7 +4,7 @@
 # Version : 1.0.0
 # Purpose : Cleanup script -- terminates the kiddoo-jenkins-agent EC2 instance
 #           and removes all associated AWS resources (EIP, SG, key pair).
-# Author  : kiddoo-infra
+# Author  : level sony 
 # Prerequisites : aws-cli >= 2, jq
 # -----------------------------------------------------------------------------
 set -euo pipefail

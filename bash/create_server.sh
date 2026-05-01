@@ -4,7 +4,7 @@
 # Version : 2.0.0
 # Purpose : AWS provisioning engine -- creates an EC2 Debian server configured
 #           as a Jenkins agent.  Called exclusively by python/create_server.py.
-# Author  : kiddoo-infra
+# Author  : Level sony
 # Prerequisites : aws-cli >= 2, jq, curl
 # -----------------------------------------------------------------------------
 set -euo pipefail
