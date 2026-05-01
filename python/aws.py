@@ -22,9 +22,12 @@ def run_bash(args):
         die(f"Script not found: {BASH_SCRIPT}")
     cmd = [
         str(BASH_SCRIPT),
-        "--region", args.region,
-        "--type", args.type,
-        "--ssh-port", str(args.ssh_port),
+        "--region",
+        args.region,
+        "--type",
+        args.type,
+        "--ssh-port",
+        str(args.ssh_port),
     ]
     if args.volume_size:
         cmd += ["--volume-size", str(args.volume_size)]
@@ -50,14 +53,18 @@ def fetch_instance(region):
     try:
         raw = subprocess.check_output(
             [
-                "aws", "ec2", "describe-instances",
-                "--region", region,
+                "aws",
+                "ec2",
+                "describe-instances",
+                "--region",
+                region,
                 "--filters",
                 "Name=tag:Name,Values=kiddoo-jenkins-agent",
                 "Name=instance-state-name,Values=running",
                 "--query",
                 "Reservations[-1].Instances[0].{ID:InstanceId,IP:PublicIpAddress}",
-                "--output", "json",
+                "--output",
+                "json",
             ],
             text=True,
         )

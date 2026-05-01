@@ -14,9 +14,9 @@ from datetime import datetime, timezone
 from log import warn
 
 # Discord embed colors (decimal)
-INFO = 3447003      # Blue
-OK = 5763719        # Green
-ERR = 15158332      # Red
+INFO = 3447003  # Blue
+OK = 5763719  # Green
+ERR = 15158332  # Red
 
 
 def notify(title, description, color, fields=None):

@@ -25,16 +25,22 @@ from notify import ERR, INFO, OK, notify
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Creates the kiddoo-jenkins-agent EC2 Jenkins agent.")
-    p.add_argument("-r", "--region",       default=os.getenv("AWS_REGION", "eu-west-3"))
-    p.add_argument("-t", "--type",         default=os.getenv("INSTANCE_TYPE", "t3.micro"))
-    p.add_argument("-p", "--ssh-port",     default=int(os.getenv("SSH_PORT", "2222")), type=int)
-    p.add_argument("-c", "--ssh-cidr",     default=os.getenv("SSH_CIDR"))
+    p = argparse.ArgumentParser(
+        description="Creates the kiddoo-jenkins-agent EC2 Jenkins agent."
+    )
+    p.add_argument("-r", "--region", default=os.getenv("AWS_REGION", "eu-west-3"))
+    p.add_argument("-t", "--type", default=os.getenv("INSTANCE_TYPE", "t3.micro"))
+    p.add_argument(
+        "-p", "--ssh-port", default=int(os.getenv("SSH_PORT", "2222")), type=int
+    )
+    p.add_argument("-c", "--ssh-cidr", default=os.getenv("SSH_CIDR"))
     p.add_argument("-k", "--ssh-key-file", default=os.getenv("SSH_PUBLIC_KEY_FILE"))
-    p.add_argument("-s", "--volume-size",  default=int(os.getenv("ROOT_VOLUME_GIB", "30")), type=int)
-    p.add_argument("--vpc-id",             default=os.getenv("VPC_ID"))
-    p.add_argument("--subnet-id",          default=os.getenv("SUBNET_ID"))
-    p.add_argument("-n", "--dry-run",      action="store_true")
+    p.add_argument(
+        "-s", "--volume-size", default=int(os.getenv("ROOT_VOLUME_GIB", "30")), type=int
+    )
+    p.add_argument("--vpc-id", default=os.getenv("VPC_ID"))
+    p.add_argument("--subnet-id", default=os.getenv("SUBNET_ID"))
+    p.add_argument("-n", "--dry-run", action="store_true")
     return p.parse_args()
 
 
@@ -50,10 +56,15 @@ def main():
         subprocess.run([str(BASH_SCRIPT), "--dry-run"], check=False)
         return
 
-    notify("kiddoo-jenkins-agent: creation started", "EC2 provisioning running.", INFO, [
-        {"name": "Region", "value": args.region, "inline": True},
-        {"name": "Type",   "value": args.type,   "inline": True},
-    ])
+    notify(
+        "kiddoo-jenkins-agent: creation started",
+        "EC2 provisioning running.",
+        INFO,
+        [
+            {"name": "Region", "value": args.region, "inline": True},
+            {"name": "Type", "value": args.type, "inline": True},
+        ],
+    )
 
     try:
         instance_id, public_ip = run_bash(args)
@@ -61,18 +72,26 @@ def main():
         notify("kiddoo-jenkins-agent: error", "Bash script failed.", ERR)
         raise
 
-    notify("kiddoo-jenkins-agent: instance running",
-           "Cloud-init is installing tools. Check /var/log/kiddoo-jenkins-agent-setup.log.", OK, [
-               {"name": "Instance",  "value": instance_id,                              "inline": True},
-               {"name": "Public IP", "value": public_ip,                                "inline": True},
-               {"name": "SSH",       "value": f"ssh -p {args.ssh_port} admin@{public_ip}", "inline": False},
-           ])
+    notify(
+        "kiddoo-jenkins-agent: instance running",
+        "Cloud-init is installing tools. Check /var/log/kiddoo-jenkins-agent-setup.log.",
+        OK,
+        [
+            {"name": "Instance", "value": instance_id, "inline": True},
+            {"name": "Public IP", "value": public_ip, "inline": True},
+            {
+                "name": "SSH",
+                "value": f"ssh -p {args.ssh_port} admin@{public_ip}",
+                "inline": False,
+            },
+        ],
+    )
 
     print(f"\n{'='*52}\n  kiddoo-jenkins-agent created\n{'='*52}")
     print(f"  Instance : {instance_id}")
     print(f"  IP       : {public_ip}")
     print(f"  SSH      : ssh -p {args.ssh_port} admin@{public_ip}")
-    print(f"  Log      : /var/log/kiddoo-jenkins-agent-setup.log  (on instance)\n")
+    print("  Log      : /var/log/kiddoo-jenkins-agent-setup.log  (on instance)\n")
 
 
 if __name__ == "__main__":
