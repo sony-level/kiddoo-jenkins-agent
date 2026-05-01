@@ -1,4 +1,4 @@
-# kiddoo-server — EC2 Jenkins Agent
+# kiddoo-jenkins-agent — EC2 Jenkins Agent
 
 Creates an AWS EC2 Debian 13 server configured as a Jenkins agent.
 
@@ -20,7 +20,7 @@ All variables can be set in `.env` instead of passing CLI flags.
 ## Quick start
 
 ```bash
-cd scripts/server/python
+cd python
 
 # Minimal — default VPC, auto-detected IP
 python3 create_server.py
@@ -56,10 +56,21 @@ python3 create_server.py --dry-run
 2. Docker Engine
 3. Ansible
 4. Terraform
-5. Jenkins agent user
-6. SSH hardening + UFW
+5. SSH hardening + UFW
 
 Logs on instance: `/var/log/kiddoo-server-setup.log`
+
+## Cleanup
+
+```bash
+# Interactive confirmation
+python3 destroy_server.py
+
+# Skip confirmation (CI / automation)
+python3 destroy_server.py --force
+```
+
+Destroys: EC2 instance, Elastic IP, security group, key pair.
 
 ## Discord notifications
 
