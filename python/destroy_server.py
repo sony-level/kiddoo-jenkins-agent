@@ -14,12 +14,13 @@ import subprocess
 import sys
 from pathlib import Path
 
+
 from dotenv import load_dotenv
+from log import warn
+from notify import ERR, INFO, OK, notify
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
-from log import warn
-from notify import ERR, INFO, OK, notify
 
 BASH_SCRIPT = Path(__file__).resolve().parent.parent / "bash" / "destroy_server.sh"
 
